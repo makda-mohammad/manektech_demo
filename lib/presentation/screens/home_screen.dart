@@ -16,11 +16,33 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text('Shopping Mall'),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.routeName);
-              },
-              icon: const Icon(Icons.shopping_cart_sharp))
+          BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  if (state is CartLoadedState)
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            state.cartCount.toString(),
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                      },
+                      icon: const Icon(Icons.shopping_cart_sharp)),
+                ],
+              );
+            },
+          )
         ],
       ),
       body: SafeArea(
