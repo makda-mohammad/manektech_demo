@@ -39,7 +39,7 @@ class CartScreen extends StatelessWidget {
                             );
                           } else {
                             return GridView.builder(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 1.6),
                                 itemBuilder: (ctx, i) => cartListTile(state.cartItems[i], context),
                                 itemCount: state.cartItems.length);
                           }
@@ -113,23 +113,26 @@ class CartScreen extends StatelessWidget {
                   Flexible(
                     flex: 3,
                     fit: FlexFit.tight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          cartItem.product.title,
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [const Text('Price'), Text('₹${cartItem.product.price}')],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [const Text('Quantity'), Text(cartItem.qty.toString())],
-                        )
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            cartItem.product.title,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [const Text('Price'), Text('₹${cartItem.product.price}')],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [const Text('Quantity'), Text(cartItem.qty.toString())],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
